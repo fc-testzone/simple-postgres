@@ -65,21 +65,11 @@ func InsertUsers() error {
 }
 
 func UpdateUsers() error {
-	var err = db.Model(&User{}).Where(&User{Login: "serg"}).Update("passwd", "00000000").Error
-	if err != nil {
-		return err
-	}
-
-	return nil
+	return db.Model(&User{}).Where(&User{Login: "serg"}).Update("passwd", "00000000").Error
 }
 
 func DeleteUsers() error {
-	var err = db.Delete(&User{}, &User{Login: "serg"}).Error
-	if err != nil {
-		return err
-	}
-
-	return nil
+	return db.Delete(&User{}, &User{Login: "serg"}).Error
 }
 
 func SelectUsers() error {
