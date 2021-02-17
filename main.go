@@ -35,9 +35,9 @@ func InsertUsers() error {
 		if err != nil {
 			return err
 		}
-		fmt.Println("User \"serg\" not found. Create new user")
+		fmt.Println(">>> User \"serg\" not found. Create new user")
 	} else {
-		fmt.Println("User \"serg\" exists. User not created")
+		fmt.Println(">>> User \"serg\" exists. User not created")
 	}
 
 	//
@@ -56,19 +56,21 @@ func InsertUsers() error {
 		if err != nil {
 			return err
 		}
-		fmt.Println("User \"diman\" not found. Create new user")
+		fmt.Println(">>> User \"diman\" not found. Create new user")
 	} else {
-		fmt.Println("User \"diman\" exists. User not created")
+		fmt.Println(">>> User \"diman\" exists. User not created")
 	}
 
 	return nil
 }
 
 func UpdateUsers() error {
+	fmt.Println(">>> UPDATE serg COLUMN passwd VALUE 00000000")
 	return db.Model(&User{}).Where(&User{Login: "serg"}).Update("passwd", "00000000").Error
 }
 
 func DeleteUsers() error {
+	fmt.Println(">>> DELETE serg BY LOGIN")
 	return db.Delete(&User{}, &User{Login: "serg"}).Error
 }
 
@@ -77,10 +79,10 @@ func SelectUsers() error {
 
 	var err = db.Find(&out, &User{Login: "serg"}).Error
 
+	fmt.Println(">>> SELECT serg BY LOGIN")
 	for _, u := range out {
 		fmt.Println(u.Login + " " + u.Passwd)
 	}
-	fmt.Println("=====================")
 
 	return err
 }
@@ -88,12 +90,12 @@ func SelectUsers() error {
 func SelectUsers2() error {
 	var users []User
 
-	var err = db.Find(&users, &User{Login: "alex", Passwd: "456"}).Error
+	var err = db.Find(&users, &User{Login: "diman", Passwd: "999999999"}).Error
 
+	fmt.Println(">>> SELECT BY LOGIN diman AND PASSWD 999999999")
 	for _, u := range users {
 		fmt.Println(u.Login + " " + u.Passwd)
 	}
-	fmt.Println("=====================")
 
 	return err
 }
@@ -103,10 +105,10 @@ func SelectAllUsers() error {
 
 	var err = db.Find(&users).Error
 
+	fmt.Println(">>> SELECT *")
 	for _, u := range users {
 		fmt.Println(u.Login + " " + u.Passwd)
 	}
-	fmt.Println("=====================")
 
 	return err
 }
